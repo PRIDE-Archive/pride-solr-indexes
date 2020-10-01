@@ -69,4 +69,6 @@ interface SolrProjectRepositoryCustom {
 	Set<String> findProjectAccessionsWithEmptyPeptideSequencesOrProteinIdentifications() throws IOException, SolrServerException;
 
 	Set<String> findProjectAccessionsWithEmptyFileNames() throws IOException, SolrServerException;
+
+	Map<String, Set<String>> findAllAccessionAndIds() throws IOException, SolrServerException;
 }

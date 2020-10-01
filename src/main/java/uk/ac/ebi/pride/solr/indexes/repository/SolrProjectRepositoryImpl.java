@@ -25,6 +25,7 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.client.solrj.response.SuggesterResponse;
 import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.params.FacetParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -369,15 +370,44 @@ class SolrProjectRepositoryImpl implements SolrProjectRepositoryCustom {
 			solrQuery.setStart(start);
 			QueryResponse re = solrTemplate.getSolrClient().query(PrideProjectField.PRIDE_PROJECTS_COLLECTION_NAME, solrQuery);
 			List<PrideSolrProject> beans = re.getBeans(PrideSolrProject.class);
-			if(beans.size() == 0) {
+			if (beans.size() == 0) {
 				break;
 			}
-			for (PrideSolrProject b : beans){
+			for (PrideSolrProject b : beans) {
 				prjs.add(b.getAccession());
 			}
 			start += cnt;
 		}
 		return prjs;
+	}
+
+	public Map<String, Set<String>> findAllAccessionAndIds() throws IOException, SolrServerException {
+		Map<String, Set<String>> mapOfIdsAndAccession = new HashMap<>();
+		SolrQuery solrQuery = new SolrQuery();
+		solrQuery.setQuery("*:*");
+		Set<String> prjAccessions = new HashSet<>();
+		Set<String> prjIds = new HashSet<>();
+		int start = 0;
+		int cnt = 1000;
+
+		solrQuery.setRows(cnt);
+		solrQuery.setFields(PrideProjectField.ACCESSION, PrideProjectField.ID);
+		while (true) {
+			solrQuery.setStart(start);
+			SolrDocumentList solrDocuments = solrTemplate.getSolrClient().query(PrideProjectField.PRIDE_PROJECTS_COLLECTION_NAME, solrQuery).getResults();
+			if (solrDocuments.size() == 0) {
+				break;
+			}
+			solrDocuments.stream().forEach(solrDocument -> {
+				prjAccessions.add((String) solrDocument.getFieldValue(PrideProjectField.ACCESSION));
+				prjIds.add((String) solrDocument.getFieldValue(PrideProjectField.ID));
+
+			});
+			start += cnt;
+		}
+		mapOfIdsAndAccession.put(PrideProjectField.ACCESSION,prjAccessions);
+		mapOfIdsAndAccession.put(PrideProjectField.ID,prjIds);
+		return mapOfIdsAndAccession;
 	}
 
 }
