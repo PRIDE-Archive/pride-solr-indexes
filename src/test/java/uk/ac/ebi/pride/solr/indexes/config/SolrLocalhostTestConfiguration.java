@@ -24,8 +24,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.repository.config.EnableSolrRepositories;
+import uk.ac.ebi.pride.solr.commons.SolrAPIHelper;
 import uk.ac.ebi.pride.solr.indexes.services.SolrProjectService;
-import uk.ac.ebi.pride.solr.indexes.utils.SolrAPIHelper;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
@@ -54,7 +54,6 @@ public class SolrLocalhostTestConfiguration extends AbstractSolrConfiguration {
 			System.out.println("Collection -- pride_projects has been refined -- ");
 		}
 		return solrTemplate;
-
 	}
 
 	/**
