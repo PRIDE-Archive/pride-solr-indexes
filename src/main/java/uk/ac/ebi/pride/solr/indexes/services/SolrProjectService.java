@@ -201,7 +201,11 @@ public class SolrProjectService {
         return repository.findProjectAccessionsWithEmptyFileNames();
     }
 
-    public Map<String, Set<String>> findAllAccessionAndIds() throws IOException, SolrServerException {
-        return repository.findAllAccessionAndIds();
+    public Set<String> findAllAccessions() throws IOException, SolrServerException {
+        return repository.findAllAccessions();
+    }
+
+    public Set<String> findAllIds() throws IOException, SolrServerException {
+        return repository.findAllIds();
     }
 }
