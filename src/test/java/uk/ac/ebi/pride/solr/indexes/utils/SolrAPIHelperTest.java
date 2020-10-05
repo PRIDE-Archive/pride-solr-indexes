@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import uk.ac.ebi.pride.solr.commons.PrideProjectField;
+import uk.ac.ebi.pride.solr.commons.SolrAPIHelper;
 
 /**
  This class will test simple functions to interact with the Solr API.
