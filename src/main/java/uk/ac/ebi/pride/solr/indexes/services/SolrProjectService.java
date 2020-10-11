@@ -121,7 +121,7 @@ public class SolrProjectService {
      */
 
     public void saveAll(List<PrideSolrProject> projects) {
-        projects.forEach(this::save);
+        repository.saveAll(projects);
     }
 
     public Iterator<PrideSolrProject> findAllUsingCursor() {
