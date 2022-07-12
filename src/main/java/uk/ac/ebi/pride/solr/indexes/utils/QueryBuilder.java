@@ -108,12 +108,12 @@ public class QueryBuilder {
      */
     private static List<String> processKeywords(List<String> keywords) {
         keywords = keywords.stream().map(x -> {
-            String[] keywordValues = x.split(":");
+            String[] keywordValues = x.trim().split(":");
             if(keywordValues.length == 2){
-                return keywordValues[1];
+                return keywordValues[1].trim();
             }else if(keywordValues.length > 2)
                 return null;
-            return x;
+            return x.trim();
         }).filter(x -> (x!=null && !x.trim().isEmpty())).collect(Collectors.toList());
         return keywords;
     }
