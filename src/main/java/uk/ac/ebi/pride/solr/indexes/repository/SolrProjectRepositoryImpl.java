@@ -108,7 +108,7 @@ class SolrProjectRepositoryImpl implements SolrProjectRepositoryCustom {
 
 
 		if(highlightQuery.getSort() == null)
-			highlightQuery.addSort(new Sort(Sort.Direction.DESC, PrideProjectFieldEnum.ACCESSION.getValue()));
+			highlightQuery.addSort(Sort.by(Sort.Direction.DESC, PrideProjectFieldEnum.ACCESSION.getValue()));
 
 		return solrTemplate.queryForHighlightPage(PrideProjectField.PRIDE_PROJECTS_COLLECTION_NAME, highlightQuery , PrideSolrProject.class);
 	}
@@ -155,7 +155,7 @@ class SolrProjectRepositoryImpl implements SolrProjectRepositoryCustom {
 
 
 		if(facetQuery.getSort() == null)
-			facetQuery.addSort(new Sort(Sort.Direction.DESC, PrideProjectFieldEnum.ACCESSION.getValue()));
+			facetQuery.addSort(Sort.by(Sort.Direction.DESC, PrideProjectFieldEnum.ACCESSION.getValue()));
 
 		return solrTemplate.queryForFacetPage(PrideProjectField.PRIDE_PROJECTS_COLLECTION_NAME, facetQuery , PrideSolrProject.class);
 	}
