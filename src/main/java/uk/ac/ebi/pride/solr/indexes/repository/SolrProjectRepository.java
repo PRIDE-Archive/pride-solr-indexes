@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.solr.repository.Query;
+import org.springframework.stereotype.Repository;
 import uk.ac.ebi.pride.solr.commons.PrideProjectField;
 import uk.ac.ebi.pride.solr.commons.PrideSolrProject;
 
@@ -17,6 +18,7 @@ import uk.ac.ebi.pride.solr.commons.PrideSolrProject;
  * @version $Id$
  */
 
+@Repository
 public interface SolrProjectRepository extends SolrProjectRepositoryCustom, CrudRepository<PrideSolrProject, String> {
 
     /**
@@ -46,11 +48,5 @@ public interface SolrProjectRepository extends SolrProjectRepositoryCustom, Crud
      */
     @Query(value = "*:*")
     Page<PrideSolrProject> findAllIgnoreCase(Pageable pageable);
-
-
-
-
-
-
 
 }

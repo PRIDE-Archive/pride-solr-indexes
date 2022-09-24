@@ -29,13 +29,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public class SolrProjectService {
 
-    final SolrProjectRepository repository;
-
     @Autowired
-    public SolrProjectService(SolrProjectRepository repository) {
-        this.repository = repository;
-    }
-
+    SolrProjectRepository repository;
 
     /**
      * This method check first that not project with same accession is in the collection and then insert it the new
