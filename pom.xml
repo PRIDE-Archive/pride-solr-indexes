@@ -285,6 +285,19 @@
         </repository>
     </repositories>
 
+    <distributionManagement>
+        <repository>
+            <id>pst-release</id>
+            <name>EBI Nexus Repository</name>
+            <url>https://www.ebi.ac.uk/Tools/maven/repos/content/repositories/pst-release</url>
+        </repository>
+        <snapshotRepository>
+            <id>pst-snapshots</id>
+            <name>EBI Nexus Snapshots Repository</name>
+            <url>https://www.ebi.ac.uk/Tools/maven/repos/content/repositories/pst-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
 
     <scm>
         <connection>scm:git:https://github.com/PRIDE-Archive/pride-solr-indexes.git</connection>
