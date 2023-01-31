@@ -11,7 +11,7 @@
 
     <groupId>uk.ac.ebi.pride.archive</groupId>
     <artifactId>pride-solr-indexes</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
+    <version>2.0.1</version>
     <name>PRIDE Solr Indexes</name>
 
     <!-- This project requires several maven profiles to build and run correctly.
