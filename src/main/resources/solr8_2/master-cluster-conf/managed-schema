@@ -182,6 +182,8 @@
 
    <field name="project_references" type="text_general" indexed="true" stored="true" multiValued="true" />
 
+   <field name="sdrf" type="text_general" uninvertible="false" sortMissingLast="true" indexed="true" stored="true"/>
+
    <field name="protein_identifications" type="text_general" indexed="true" stored="false" multiValued="true" />
    <field name="protein_identifications_facet" type="string" indexed="true" stored="false" multiValued="true" />
 
