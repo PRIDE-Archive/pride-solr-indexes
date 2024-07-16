@@ -29,8 +29,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public class SolrProjectService {
 
-    @Autowired
-    SolrProjectRepository repository;
+//    @Autowired
+//    SolrProjectRepository repository;
 
     /**
      * This method check first that not project with same accession is in the collection and then insert it the new
@@ -41,12 +41,12 @@ public class SolrProjectService {
      * @return
      */
     public PrideSolrProject save(PrideSolrProject project) {
-        PrideSolrProject prideSolrProject = repository.findByAccession(project.getAccession());
-        if (prideSolrProject == null) {
-            repository.save(project);
-            log.info("A new project has been saved in Solr index -- " + project.getAccession());
-        } else
-            log.info("A project with same accession has been found in the Solr index, you MUST use update -- " + project.getAccession());
+//        PrideSolrProject prideSolrProject = repository.findByAccession(project.getAccession());
+//        if (prideSolrProject == null) {
+//            repository.save(project);
+//            log.info("A new project has been saved in Solr index -- " + project.getAccession());
+//        } else
+//            log.info("A project with same accession has been found in the Solr index, you MUST use update -- " + project.getAccession());
         return project;
     }
 
@@ -60,7 +60,7 @@ public class SolrProjectService {
      */
 
     public PrideSolrProject update(PrideSolrProject project) {
-        project = repository.save(project);
+//        project = repository.save(project);
         return project;
     }
 
@@ -72,15 +72,15 @@ public class SolrProjectService {
      */
 
     public PrideSolrProject upsert(PrideSolrProject project) {
-        PrideSolrProject solrProject = repository.findByAccession(project.getAccession());
-        if (solrProject == null) {
-            project = repository.save(project);
-            log.info("A new project has been saved in Solr index -- " + project.getAccession());
-        } else {
-            project.setId((String) solrProject.getId());
-            project = repository.save(project);
-            log.info("project has been Inserted or updated in MongoDB with accession -- " + project.getAccession());
-        }
+//        PrideSolrProject solrProject = repository.findByAccession(project.getAccession());
+//        if (solrProject == null) {
+//            project = repository.save(project);
+//            log.info("A new project has been saved in Solr index -- " + project.getAccession());
+//        } else {
+//            project.setId((String) solrProject.getId());
+//            project = repository.save(project);
+//            log.info("project has been Inserted or updated in MongoDB with accession -- " + project.getAccession());
+//        }
         return project;
     }
 
@@ -90,7 +90,8 @@ public class SolrProjectService {
      * @return
      */
     public Iterable<PrideSolrProject> findAll() {
-        return repository.findAll();
+        return null;
+//        return repository.findAll();
     }
 
     /*
@@ -98,7 +99,7 @@ public class SolrProjectService {
      * */
 
     public void deleteProjectById(String id) {
-        repository.deleteById(id);
+//        repository.deleteById(id);
     }
 
     /**
@@ -106,7 +107,7 @@ public class SolrProjectService {
      */
 
     public void deleteAll() {
-        repository.deleteAll();
+//        repository.deleteAll();
     }
 
     /**
@@ -116,15 +117,17 @@ public class SolrProjectService {
      */
 
     public void saveAll(List<PrideSolrProject> projects) {
-        repository.saveAll(projects);
+//        repository.saveAll(projects);
     }
 
     public Iterator<PrideSolrProject> findAllUsingCursor() {
-        return repository.findAllUsingCursor();
+//        return repository.findAllUsingCursor();
+        return null;
     }
 
     public PrideSolrProject findByAccession(String accession) {
-        return repository.findByAccession(accession);
+//        return repository.findByAccession(accession);
+        return null;
     }
 
     /**
@@ -139,21 +142,25 @@ public class SolrProjectService {
     public HighlightPage<PrideSolrProject> findByKeyword(List<String> keywords, String filterQuery, PageRequest pageRequest, String dateGap) {
 
         MultiValueMap<String, String> filters = StringUtils.parseFilterParameters(filterQuery);
-        return repository.findByKeyword(keywords, filters, pageRequest, dateGap);
+        return null;
+//        return repository.findByKeyword(keywords, filters, pageRequest, dateGap);
     }
 
     public Page<PrideSolrProject> findAllIgnoreCase(PageRequest pageRequest) {
-        return repository.findAllIgnoreCase(pageRequest);
+        return null;
+//        return repository.findAllIgnoreCase(pageRequest);
 
     }
 
     public FacetPage<PrideSolrProject> findAllFacetIgnoreCase(Pageable pageRequest) {
-        return repository.findAllFacetIgnoreCase(pageRequest);
+        return null;
+//        return repository.findAllFacetIgnoreCase(pageRequest);
     }
 
     public FacetPage<PrideSolrProject> findFacetByKeyword(List<String> keywords, String filterQuery, PageRequest pageRequest, PageRequest facetPage, String gap) {
         MultiValueMap<String, String> filters = StringUtils.parseFilterParameters(filterQuery);
-        return repository.findFacetByKeyword(keywords, filters, pageRequest, facetPage, gap);
+        return null;
+//        return repository.findFacetByKeyword(keywords, filters, pageRequest, facetPage, gap);
     }
 
     /**
@@ -164,18 +171,20 @@ public class SolrProjectService {
      * @return List of Similar projects.
      */
     public List<PrideSolrProject> findSimilarProjects(String accession, Integer pageSize, Integer page) {
-        Map<String, Double> ids = repository.findMoreLikeThisIds(accession, pageSize, page);
-        List<PrideSolrProject> similarDatasets = new ArrayList<>();
-        Iterable<PrideSolrProject> itDatasets = repository.findAllById(ids.entrySet().stream().map(Map.Entry::getKey).collect(Collectors.toSet()));
-        if (itDatasets != null) {
-            itDatasets.forEach(x -> {
-                if (!x.getAccession().equalsIgnoreCase(accession)) {
-                    x.setScore(new Float(ids.get(x.getId())));
-                    similarDatasets.add(x);
-                }
-            });
-        }
-        return similarDatasets;
+//        Map<String, Double> ids = repository.findMoreLikeThisIds(accession, pageSize, page);
+//        List<PrideSolrProject> similarDatasets = new ArrayList<>();
+//        Iterable<PrideSolrProject> itDatasets = repository.findAllById(ids.entrySet().stream().map(Map.Entry::getKey).collect(Collectors.toSet()));
+//        if (itDatasets != null) {
+//            itDatasets.forEach(x -> {
+//                if (!x.getAccession().equalsIgnoreCase(accession)) {
+//                    x.setScore(new Float(ids.get(x.getId())));
+//                    similarDatasets.add(x);
+//                }
+//            });
+//        }
+//        return similarDatasets;
+//
+        return null;
     }
 
     /**
@@ -185,22 +194,27 @@ public class SolrProjectService {
      * @return
      */
     public List<String> findAutoComplete(String keyword) {
-        return repository.findAutoComplete(keyword);
+//        return repository.findAutoComplete(keyword);
+        return null;
     }
 
     public Set<String> findProjectAccessionsWithEmptyPeptideSequencesOrProteinIdentifications() throws IOException, SolrServerException {
-        return repository.findProjectAccessionsWithEmptyPeptideSequencesOrProteinIdentifications();
+        return null;
+//        return repository.findProjectAccessionsWithEmptyPeptideSequencesOrProteinIdentifications();
     }
 
     public Set<String> findProjectAccessionsWithEmptyFileNames() throws IOException, SolrServerException {
-        return repository.findProjectAccessionsWithEmptyFileNames();
+        return null;
+//        return repository.findProjectAccessionsWithEmptyFileNames();
     }
 
     public Set<String> findAllAccessions() throws IOException, SolrServerException {
-        return repository.findAllAccessions();
+        return null;
+//        return repository.findAllAccessions();
     }
 
     public Set<String> findAllIds() throws IOException, SolrServerException {
-        return repository.findAllIds();
+        return null;
+//        return repository.findAllIds();
     }
 }
