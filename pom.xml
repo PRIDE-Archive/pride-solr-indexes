@@ -30,7 +30,7 @@
         <data-provider-api-version>21-0.0.0-SNAPSHOT</data-provider-api-version>
         <uk.ac.ebi.pride.px-submission-core.version>2.0.18</uk.ac.ebi.pride.px-submission-core.version>
         <uk.ac.ebi.pride.utilities.pride-utilities.version>2.0.19-SNAPSHOT</uk.ac.ebi.pride.utilities.pride-utilities.version>
-        <stanford.corenlp.version>3.9.1</stanford.corenlp.version>
+        <stanford.corenlp.version>4.4.0</stanford.corenlp.version>
     </properties>
 
     <dependencies>
